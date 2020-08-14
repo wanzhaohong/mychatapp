@@ -108,6 +108,8 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
             if (otp != null){
                 verificationCode.setText(otp);
                 authentication(otp);
+            }else{
+                signWithCredential(phoneAuthCredential);
             }
         }
 
@@ -166,7 +168,7 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
                         hashMap.put("username", phonenumber);
 
                         //add the information of the registered Individual user to the online database
-                        reference.child(userid).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        reference.child(userid).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
@@ -239,25 +241,16 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
                         hashMap_chat.put("sender", phonenumber);
                         hashMap_chat.put("receiver", "everyone");
                         hashMap_chat.put("status", "from_Official");
-                        hashMap_chat.put("seed", "(" + public_modulus + ")" + public_exponents);
+                        hashMap_chat.put("secret", "(" + public_modulus + ")" + public_exponents);
 
                         //store the private key into the local database
                         LocalUser officialuser = new LocalUser(phonenumber, private_modulus, private_exponents, "Official");
                         localUserViewModel.addLocalUser(officialuser);
 
-                        databaseReference.child(phonenumber).setValue(hashMap_chat).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()){
-                                    Toast.makeText(PhoneAuthenticationActivity.this, "Public key uploaded", Toast.LENGTH_SHORT).show();
-                                }else{
-                                    Toast.makeText(PhoneAuthenticationActivity.this, "Public key not uploaded", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+                        databaseReference.child(phonenumber).updateChildren(hashMap_chat);
 
                         //add the information of the registered Official user to the online database
-                        reference.child(userid).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        reference.child(userid).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {

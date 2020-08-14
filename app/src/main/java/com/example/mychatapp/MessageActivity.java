@@ -83,7 +83,7 @@ public class MessageActivity extends AppCompatActivity{
     LocalUserViewModel localUserViewModel;
     LocalUser luser;
 
-    String usertype;
+    String usertype = "Individual";
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -119,13 +119,9 @@ public class MessageActivity extends AppCompatActivity{
         localUserViewModel.getAll().observe(MessageActivity.this, new Observer<List<LocalUser>>() {
             @Override
             public void onChanged(List<LocalUser> localUser_s) {
-                int i = 0;
                 for (LocalUser localuser : localUser_s){
                     if (localuser.getPhonenumber().equals(firebaseUser.getPhoneNumber()) && localuser.getStatus().equals("Official")){
                         usertype = "Official";
-                        luser = localuser;
-                    }else if (localuser.getPhonenumber().equals(firebaseUser.getPhoneNumber()) && localuser.getStatus().equals("None")){
-                        usertype = "Individual";
                         luser = localuser;
                     }
                 }
@@ -199,7 +195,7 @@ public class MessageActivity extends AppCompatActivity{
                                 hashMap_chat.put("sender", sender);
                                 hashMap_chat.put("receiver", "everyone");
                                 hashMap_chat.put("status", "from_Official");
-                                hashMap_chat.put("seed", "(" + luser.getPrivate_modulus() + ")" + user.getPublicKey_exponent());
+                                hashMap_chat.put("secret", "(" + luser.getPrivate_modulus() + ")" + user.getPublicKey_exponent());
                                 databaseReference.child(sender).updateChildren(hashMap_chat);
                             }
                         }
@@ -226,6 +222,8 @@ public class MessageActivity extends AppCompatActivity{
                 localchat.setIdentity("Unknown");
                 localchat.setStatus("unchecked");
                 localchatViewModel.addChat(localchat);
+
+                Toast.makeText(this, "Official", Toast.LENGTH_SHORT).show();
 
             }else if (usertype.equals("Individual")){
                 //if the current user is Individual user, then use the HOTP value as salt in the hashed message. Then send the original message, counter and the salted hashtag to the recipient.
@@ -264,6 +262,8 @@ public class MessageActivity extends AppCompatActivity{
                 localchat.setIdentity("Unknown");
                 localchat.setStatus("unchecked");
                 localchatViewModel.addChat(localchat);
+
+                Toast.makeText(this, "Individual", Toast.LENGTH_SHORT).show();
             }
         }else{
             //send sms to the recipient
