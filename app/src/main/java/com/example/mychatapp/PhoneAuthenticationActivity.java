@@ -82,6 +82,13 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
         });
     }
 
+    /***************************************************************************************
+     *    Title: <Authenticate with Firebase on Android using a Phone Number>
+     *    Author: <Firebase>
+     *    Date: <2020/08/14>
+     *    Availability: <https://firebase.google.com/docs/auth/android/phone-auth>
+     ***************************************************************************************/
+    
     //using to send the otp to the phone number
     private void sendCodeToPhone(String phone){
         PhoneAuthProvider.getInstance().verifyPhoneNumber(phone, 10, TimeUnit.SECONDS, this, mCallBacks);
