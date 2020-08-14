@@ -88,7 +88,7 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
      *    Date: <2020/08/14>
      *    Availability: <https://firebase.google.com/docs/auth/android/phone-auth>
      ***************************************************************************************/
-
+    
     //using to send the otp to the phone number
     private void sendCodeToPhone(String phone){
         PhoneAuthProvider.getInstance().verifyPhoneNumber(phone, 10, TimeUnit.SECONDS, this, mCallBacks);
@@ -108,8 +108,6 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
             if (otp != null){
                 verificationCode.setText(otp);
                 authentication(otp);
-            }else{
-                signWithCredential(phoneAuthCredential);
             }
         }
 
@@ -172,7 +170,7 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(PhoneAuthenticationActivity.this, "Sign in successfully!(Individual)", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PhoneAuthenticationActivity.this, "Sign in successfully!", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(PhoneAuthenticationActivity.this, MainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
@@ -263,7 +261,7 @@ public class PhoneAuthenticationActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(PhoneAuthenticationActivity.this, "Sign in successfully!(Official)", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(PhoneAuthenticationActivity.this, "Sign in successfully!", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(PhoneAuthenticationActivity.this, MainActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
