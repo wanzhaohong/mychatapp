@@ -46,7 +46,6 @@ public class DigitalSignature {
         return s;
     }
 
-    //https://stackoverflow.com/questions/19818550/java-retrieve-the-actual-value-of-the-public-key-from-the-keypair-object
     //generate the key pair that includes public and private key
     public static KeyPair generateKeypair() throws NoSuchAlgorithmException {
         //create keypair generator object
