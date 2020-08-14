@@ -1,7 +1,6 @@
 package com.example.mychatapp.generator;
 
 import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -12,10 +11,16 @@ import java.security.Signature;
 import java.security.SignatureException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.RSAPrivateKeySpec;
-import java.util.Arrays;
+
+/***************************************************************************************
+ *    Title: <Java Cryptography - Creating Signature>
+ *    Author: <tutorialspoint>
+ *    Date: <2020/08/14>
+ *    Availability: <https://www.tutorialspoint.com/java_cryptography/java_cryptography_creating_signature.htm>
+ ***************************************************************************************/
 
 public class DigitalSignature {
-    private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
+    private static final char[] HEX_CHARS = "0123456789ABCDEF".toCharArray();
 
     public static String GenerateSignature(String data, String modulus, String exponent) throws NoSuchAlgorithmException, InvalidKeyException, SignatureException, InvalidKeySpecException {
         //convert String to BigInteger
@@ -53,31 +58,31 @@ public class DigitalSignature {
         return pair;
     }
 
-    //https://stackoverflow.com/questions/9655181/how-to-convert-a-byte-array-to-a-hex-string-in-java/9855338#9855338
     //convert byte[] to hex-string
     public static String byteToHex(byte[] b){
         char[] chars = new char[b.length * 2];
         for (int i = 0; i < b.length; i++){
             int value = b[i] & 0xFF;
-            chars[i*2] = HEX_ARRAY[value >>> 4];
-            chars[i*2+1] = HEX_ARRAY[value & 0x0F];
+            chars[i*2] = HEX_CHARS[value >>> 4];
+            chars[i*2+1] = HEX_CHARS[value & 0x0F];
         }
         return new String(chars);
     }
 
+    //convert hex-string to byte[]
     public static byte[] toByteArray(String hexString) {
-        hexString = hexString.toLowerCase();
-        final byte[] byteArray = new byte[hexString.length() >> 1];
+        String hex = hexString.toLowerCase();
+        final byte[] bytes = new byte[hex.length() >> 1];
         int index = 0;
-        for (int i = 0; i < hexString.length(); i++) {
-            if (index  > hexString.length() - 1)
-                return byteArray;
-            byte highDit = (byte) (Character.digit(hexString.charAt(index), 16) & 0xFF);
-            byte lowDit = (byte) (Character.digit(hexString.charAt(index + 1), 16) & 0xFF);
-            byteArray[i] = (byte) (highDit << 4 | lowDit);
+        for (int i = 0; i < hex.length(); i++) {
+            if (index  > hex.length() - 1)
+                return bytes;
+            byte high = (byte) (Character.digit(hex.charAt(index), 16) & 0xFF);
+            byte low = (byte) (Character.digit(hex.charAt(index + 1), 16) & 0xFF);
+            bytes[i] = (byte) (high << 4 | low);
             index += 2;
         }
-        return byteArray;
+        return bytes;
     }
 
 }

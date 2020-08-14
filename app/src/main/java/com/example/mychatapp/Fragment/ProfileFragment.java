@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.mychatapp.PhoneAuthenticationActivity;
 import com.example.mychatapp.PreStartActivity;
 import com.example.mychatapp.R;
 import com.example.mychatapp.viewmodel.LocalUserViewModel;

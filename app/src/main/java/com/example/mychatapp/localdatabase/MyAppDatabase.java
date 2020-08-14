@@ -1,6 +1,5 @@
 package com.example.mychatapp.localdatabase;
 
-
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -13,6 +12,13 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.example.mychatapp.Model.ChattedUser;
 import com.example.mychatapp.Model.Localchat;
 import com.example.mychatapp.Model.LocalUser;
+
+/***************************************************************************************
+ *    Title: <Room + ViewModel + LiveData + RecyclerView (MVVM)>
+ *    Author: <Coding in Flow>
+ *    Date: <2020/08/14>
+ *    Availability: <https://codinginflow.com/tutorials/android/room-viewmodel-livedata-recyclerview-mvvm/part-1-introduction>
+ ***************************************************************************************/
 
 //this class is represent the database
 @Database(entities = {Localchat.class, ChattedUser.class, LocalUser.class}, version = 9, exportSchema = false)
@@ -57,8 +63,6 @@ public abstract class MyAppDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            //myDao.addChat(new Localchat("ww1", "sender1", "receiver1", "Unknown"));
-            //chattedUserDAO.addUser(new ChattedUser("user1"));
             return null;
         }
     }

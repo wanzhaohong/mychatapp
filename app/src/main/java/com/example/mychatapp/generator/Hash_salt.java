@@ -6,11 +6,13 @@ import java.security.NoSuchAlgorithmException;
 
 public class Hash_salt {
 
-    /**
-     * Based on Java interview point(https://www.javainterviewpoint.com/java-salted-password-hashing/)
-     * Code is derived from Java Salted Password Hashing algorithm
-     * @since 2020/06/19
-     */
+    /***************************************************************************************
+     *    Title: <Java Salted Password Hashing algorithm>
+     *    Author: <Java interview point>
+     *    Date: <2020/08/14>
+     *    Availability: <https://www.javainterviewpoint.com/java-salted-password-hashing/>
+     ***************************************************************************************/
+
     //add salt into a hashed message.
     public static String Hash_addSalt(String hash, String salt){
         String generateHash = null;

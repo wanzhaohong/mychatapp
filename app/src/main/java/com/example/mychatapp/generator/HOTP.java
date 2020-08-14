@@ -2,23 +2,9 @@ package com.example.mychatapp.generator;
 
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
-import java.io.InputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.nio.file.Paths;
-import java.nio.file.Files;
-import java.security.spec.KeySpec;
-import java.util.Arrays;
-import java.util.Base64;
-import java.security.SecureRandom;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import javax.crypto.SecretKeyFactory;
 import javax.crypto.Mac;
-import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class HOTP {
@@ -58,8 +44,7 @@ public class HOTP {
     }
 
     //HMAC-SHA1 function
-    //Input: secret key & message
-    //output: byte array
+    //using secret key and the message to create Hash-based Message Authentication Code
     private static byte[] HMAC_SHA1(byte[] seed, byte[] message){
         try {
             Mac hmac_sha1 = Mac.getInstance("HmacSHA1");
@@ -72,13 +57,13 @@ public class HOTP {
         return null;
     }
 
-    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    /***************************************************************************************
+     *    Title: <HOTP: An HMAC-Based One-Time Password Algorithm>
+     *    Copyright (C) The Internet Society (2005).
+     *    Date: <2020/08/14>
+     *    Availability: <https://tools.ietf.org/html/rfc4226>
+     ***************************************************************************************/
 
-    /**
-     * Based on IETF RFC 4226 (http://tools.ietf.org/html/rfc4226)
-     * Code is derived from OATH HOTP algorithm
-     * @since 2020/06/19
-     */
     public static String generateOTP(byte[] secret, long movingFactor){
         //put movingFactors value into text byte array
         String result;
@@ -92,6 +77,7 @@ public class HOTP {
         //compute hmac hash
         byte[] hash = HMAC_SHA1(secret, text);
 
+        assert hash != null;
         result = new String(hash, StandardCharsets.UTF_8);
 
         return result;

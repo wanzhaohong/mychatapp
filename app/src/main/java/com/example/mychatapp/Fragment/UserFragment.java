@@ -15,22 +15,15 @@ import android.view.ViewGroup;
 
 import com.example.mychatapp.Adapter.User_Adapter;
 import com.example.mychatapp.AddNewContactActivity;
-import com.example.mychatapp.MainActivity;
-import com.example.mychatapp.MessageActivity;
 import com.example.mychatapp.Model.ChattedUser;
-import com.example.mychatapp.Model.Localchat;
-import com.example.mychatapp.Model.User;
 import com.example.mychatapp.R;
-import com.example.mychatapp.SMS.SMSBroadcastReceiver;
 import com.example.mychatapp.viewmodel.ChattedUserViewModel;
 import com.example.mychatapp.viewmodel.LocalchatViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 public class UserFragment extends Fragment {
     private RecyclerView recyclerView;
