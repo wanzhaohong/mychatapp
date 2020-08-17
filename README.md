@@ -9,3 +9,5 @@ Platform: Android Studio, Firebase
 This application needs to be installed on an Android mobile device.
 
 Demo video (edited using WeVideo): https://www.youtube.com/watch?v=F2ge7eXMcU0
+
+Installation instruction: 
