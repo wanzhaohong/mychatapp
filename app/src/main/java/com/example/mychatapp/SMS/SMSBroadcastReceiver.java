@@ -85,30 +85,27 @@ public class SMSBroadcastReceiver extends BroadcastReceiver{
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        //int i = 0;
+                        String secret = "";
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                             Chat chat = dataSnapshot.getValue(Chat.class);
                             assert chat != null;
                             //if the Sender Id exists in the sent_message table(in firebase realtime database), and nobody used it for the authentication.
                             if (chat.getSender().equals(finalAddress) && (chat.getStatus().equals("un_used") || chat.getStatus().equals("from_Official"))){
                                 reference.child(finalAddress).child("status").setValue("used");
-                                //send the information(which belongs to this Sender ID) to the Main activity for authentication
-                                Intent intent1 = new Intent();
-                                intent1.setAction("SMS_RECEIVED");
-                                intent1.putExtra("sender", finalAddress);
-                                intent1.putExtra("message", finalSmsBody);
-                                intent1.putExtra("seed", chat.getSecret());
-                                context.sendBroadcast(intent1);
-                                reference.removeEventListener(this);
-                            }else{
-                                //if can not find the same Sender ID in the database, still send the information of the incoming message to the Main activity, but set the secret as empty.
-                                Intent intent1 = new Intent();
-                                intent1.setAction("SMS_RECEIVED");
-                                intent1.putExtra("sender", finalAddress);
-                                intent1.putExtra("message", finalSmsBody);
-                                intent1.putExtra("seed", "");
-                                context.sendBroadcast(intent1);
+                                //i += 1;
+                                secret = chat.getSecret();
                             }
                         }
+
+                        //send the information(which belongs to this Sender ID) to the Main activity for authentication
+                        Intent intent1 = new Intent();
+                        intent1.setAction("SMS_RECEIVED");
+                        intent1.putExtra("sender", finalAddress);
+                        intent1.putExtra("message", finalSmsBody);
+                        intent1.putExtra("seed", secret);
+                        context.sendBroadcast(intent1);
+
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {}
