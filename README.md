@@ -22,7 +22,7 @@ Installation instruction:
 - Email_address/username: zhaohongwan.carleton@gmail.com   
 - password: C2009121126
 
-5. After log in the authorized account, you have to click the Firebase icon so you can connect to Firebsae successfully. 
+5. After log in the authorized account, you have to click the Firebase icon so you can connect to Firebsae successfully. There might be one more pop-ups, click the 'sync' button since we do have an exist online database on firebase server.
 
 6. Connect the Android mobile device with the computer and click the 'Run' button on the top panel, then click the 'run app' button. At the end, this SMS applicaiton will be installed on the Android mobile device. 
 
