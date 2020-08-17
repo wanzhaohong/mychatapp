@@ -85,7 +85,6 @@ public class SMSBroadcastReceiver extends BroadcastReceiver{
                 reference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        //int i = 0;
                         String secret = "";
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                             Chat chat = dataSnapshot.getValue(Chat.class);
@@ -93,7 +92,6 @@ public class SMSBroadcastReceiver extends BroadcastReceiver{
                             //if the Sender Id exists in the sent_message table(in firebase realtime database), and nobody used it for the authentication.
                             if (chat.getSender().equals(finalAddress) && (chat.getStatus().equals("un_used") || chat.getStatus().equals("from_Official"))){
                                 reference.child(finalAddress).child("status").setValue("used");
-                                //i += 1;
                                 secret = chat.getSecret();
                             }
                         }
