@@ -1,6 +1,6 @@
 # mychatapp
 
-Project title: As SMS application to prevent Sender ID Spoofing
+Project title: An SMS application to prevent Sender ID Spoofing
 
 Programming language: Java, SQLite Query
 
